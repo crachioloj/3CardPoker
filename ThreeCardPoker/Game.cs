@@ -21,5 +21,10 @@ namespace ThreeCardPoker
             _PlayerCount = _GameInfo.PlayerCount;
             _Players = _GameInfo.Players;
         }
+
+        public List<Player> Play()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
