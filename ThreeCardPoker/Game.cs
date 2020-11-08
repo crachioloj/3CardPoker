@@ -10,12 +10,16 @@ namespace ThreeCardPoker
     public class Game
     {
         private readonly Rules _Rules;
+        private readonly int _PlayerCount;
         private readonly IEnumerable<Player> _Players;
 
-        public Game(Rules rules, IEnumerable<Player> players)
+        private readonly GameInfo _GameInfo;
+
+        public Game(GameInfo gameInfo)
         {
-            _Rules = rules ?? throw new ArgumentNullException(nameof(rules));
-            _Players = players;
+            _GameInfo = gameInfo;
+            _PlayerCount = _GameInfo.PlayerCount;
+            _Players = _GameInfo.Players;
         }
     }
 }

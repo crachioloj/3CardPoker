@@ -8,21 +8,29 @@ namespace ThreeCardPoker
 {
     public static class InputProcessor
     {
-        public static IEnumerable<IEnumerable<string>> ProcessStringInput(string input)
+        public static GameInfo GetGameInfoFromStringInput(string input)
         {
             var rows = input.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList()
                 .Select(row => row.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries));
 
             var header = rows.First();
-            int playerCount = header.Count() == 1 ? int.Parse(header.First()) : 0;
 
-            if (playerCount < 1)
+            if (header.Count() != 1 || !int.TryParse(header.First(), out int playerCount))
             {
-                return null;
+                throw new InvalidOperationException("Invalid value provided for player count.");
             }
 
-            var cards = rows.Skip(1).Select(row => row);
-            return null;
+            var playerDataRows = rows.Skip(1);
+
+            if (playerDataRows.Count() != playerCount)
+            {
+                throw new InvalidOperationException("Number of player data rows does not match expected player count.");
+            }
+
+            var cards = playerDataRows.Select(row => PlayerFactory.CreatePlayer(row));
+            var gameInfo = new GameInfo(playerCount, cards);
+
+            return gameInfo;
         }
     }
 }

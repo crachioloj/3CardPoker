@@ -14,15 +14,42 @@ namespace ThreeCardPoker.Test.InputProcessorTests
     public class WhenInputReceived
     {
         [TestMethod]
-        public void ThenInputAccepted()
+        [DataRow(
+@"a
+0 2c As 4d
+1    Kd 5h 6c
+2 Jc Jd   9s  ")]
+        [DataRow(
+@"3 2c
+0 2c As 4d
+1 Kd 5h 6c
+2 Jc Jd 9s")]
+        [ExpectedException(typeof(InvalidOperationException), "Invalid value provided for player count.")]
+        public void AndInputForPlayerCountIsInvalidThenExceptionIsThrown(string input)
         {
-            string input =
-@"3     
-0 2c As 4d   
-1    Kd 5h 6c      
-2 Jc Jd   9s  ";
+            var _ = InputProcessor.GetGameInfoFromStringInput(input);
+        }
 
-            var info = InputProcessor.ProcessStringInput(input);
+        [TestMethod]
+        [DataRow(
+@"1
+0 2c As 4d
+1    Kd 5h 6c
+2 Jc Jd   9s  ")]
+        [DataRow(
+@"5
+0 2c As 4d
+1 Kd 5h 6c
+2 Jc Jd 9s")]
+        [DataRow(
+@"4
+0 2c As 4d")]
+        [DataRow(
+@"3")]
+        [ExpectedException(typeof(InvalidOperationException), "Number of player data rows does not match expected player count.")]
+        public void AndPlayerCountDoesNotMatchPlayerRowsThenExceptionIsThrown(string input)
+        {
+            var _ = InputProcessor.GetGameInfoFromStringInput(input);
         }
     }
 }
