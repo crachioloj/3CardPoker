@@ -10,35 +10,14 @@ namespace ThreeCardPoker
         {
             if (players.Count() == 1) return players;
 
-            IEnumerable<Player> winners = players;
             if (hand == HandType.ThreeOfAKind)
             {
-                var highestRank = winners.Select(p => p.HighestRank).Max();
-                winners = players.Where(p => p.HighestRank == highestRank);
+                return ResolveThreeOfAKind(players);
             }
-            else if (hand == HandType.Pair)
+            
+            if (hand == HandType.Pair)
             {
-                var rankByPlayer = new Dictionary<Player, RankType>();
-                var maxRank = RankType.LowAce;
-                foreach (var player in winners)
-                {
-                    var pairRank = player.Cards
-                        .GroupBy(c => c.Rank)
-                        .Select(group => new { Rank = group.Key, Count = group.Count() })
-                        .Where(g => g.Count == 2)
-                        .Select(g => g.Rank)
-                        .FirstOrDefault();
-
-                    rankByPlayer.Add(player, pairRank);
-                    if (pairRank > maxRank)
-                    {
-                        maxRank = pairRank;
-                    }
-                }
-
-                winners = rankByPlayer.Where(r => r.Value == maxRank).Select(r => r.Key);
-
-
+                return ResolvePair(players);
             }
 
             //var remainingCardsByPlayer = new Dictionary<Player, List<Card>>();
@@ -80,6 +59,39 @@ namespace ThreeCardPoker
             //        }
             //    }
             //}
+            return players;
+        }
+
+        private static IEnumerable<Player> ResolvePair(IEnumerable<Player> players)
+        {
+            var rankByPlayer = new Dictionary<Player, RankType>();
+            var maxRank = RankType.LowAce;
+            foreach (var player in players)
+            {
+                var pairRank = player.Cards
+                    .GroupBy(c => c.Rank)
+                    .Select(group => new { Rank = group.Key, Count = group.Count() })
+                    .Where(g => g.Count == 2)
+                    .Select(g => g.Rank)
+                    .FirstOrDefault();
+
+                rankByPlayer.Add(player, pairRank);
+                if (pairRank > maxRank)
+                {
+                    maxRank = pairRank;
+                }
+            }
+
+            var winners = rankByPlayer.Where(r => r.Value == maxRank).Select(r => r.Key);
+
+            return winners;
+        }
+
+        private static IEnumerable<Player> ResolveThreeOfAKind(IEnumerable<Player> players)
+        {
+            var highestRank = players.Select(p => p.HighestRank).Max();
+            var winners = players.Where(p => p.HighestRank == highestRank);
+
             return winners;
         }
     }
