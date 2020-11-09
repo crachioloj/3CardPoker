@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="CardFactoryTests\WhenCreatingCard.cs" />
     <Compile Include="GameTests\WhenGameIsPlayed.cs" />
+    <Compile Include="HandTypeCalculatorTests\WhenHandCalculated.cs" />
     <Compile Include="PlayerFactoryTests\WhenCreatingPlayer.cs" />
     <Compile Include="SampleData.cs" />
     <Compile Include="InputProcessorTests\WhenInputReceived.cs" />
