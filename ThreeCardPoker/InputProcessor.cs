@@ -24,10 +24,16 @@ namespace ThreeCardPoker
                 return (null, "Number of player data rows does not match expected player count.");
             }
 
-            var cards = playerDataRows.Select(row => PlayerFactory.CreatePlayer(row));
-            var gameInfo = new GameInfo(playerCount, cards);
-
-            return (gameInfo, string.Empty);
+            try
+            {
+                var cards = playerDataRows.Select(row => PlayerFactory.CreatePlayer(row)).ToList();
+                var gameInfo = new GameInfo(playerCount, cards);
+                return (gameInfo, string.Empty);
+            }
+            catch (Exception ex)
+            {
+                return (null, ex.Message);
+            }
         }
     }
 }

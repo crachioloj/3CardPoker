@@ -15,7 +15,7 @@ namespace ThreeCardPoker.Test.PlayerFactoryTests
         [DataRow(new string[] { "1", "2c", "As" })]
         [DataRow(new string[] { "2", "2c" })]
         [DataRow(new string[] { "3" })]
-        [ExpectedException(typeof(InvalidOperationException), "A card requires exactly two characters")]
+        [ExpectedException(typeof(InvalidOperationException), "Incorrect number of values per row provided.")]
         public void AndIncorrectNumberOfValuesProvidedThenExceptionIsThrown(string[] input)
         {
             var _ = PlayerFactory.CreatePlayer(input);

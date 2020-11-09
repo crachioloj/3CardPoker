@@ -17,7 +17,7 @@ namespace ThreeCardPoker.Test.CardFactoryTests
         [ExpectedException(typeof(InvalidOperationException), "A card requires exactly two characters")]
         public void AndWrongNumberOfCharactersEnteredThenExceptionIsThrown(string value)
         {
-            CardFactory.CreateCard(value);
+            var _ = CardFactory.CreateCard(value);
         }
 
         [TestMethod]
@@ -28,7 +28,7 @@ namespace ThreeCardPoker.Test.CardFactoryTests
         [ExpectedException(typeof(InvalidOperationException))]
         public void AndInvalidRankValueEnteredThenExceptionIsThrown(string value)
         {
-            CardFactory.CreateCard(value);
+            var _ = CardFactory.CreateCard(value);
         }
 
         [TestMethod]
@@ -39,7 +39,7 @@ namespace ThreeCardPoker.Test.CardFactoryTests
         [ExpectedException(typeof(InvalidOperationException))]
         public void AndInvalidSuitValueEnteredThenExceptionIsThrown(string value)
         {
-            CardFactory.CreateCard(value);
+            var _ = CardFactory.CreateCard(value);
         }
 
         [TestMethod]

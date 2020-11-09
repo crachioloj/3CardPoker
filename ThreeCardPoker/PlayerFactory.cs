@@ -14,7 +14,7 @@ namespace ThreeCardPoker
 
             if (values.Length != Rules.ValuesPerDataRow)
             {
-                throw new InvalidOperationException("Incorrect number of values provided.");
+                throw new InvalidOperationException("Incorrect number of values per row provided.");
             }
 
             if (!int.TryParse(values[0], out int playerNumber) || playerNumber < 0)
