@@ -20,10 +20,10 @@ namespace ThreeCardPoker.Test.GameTests
 2 Jc Jd 9s";
             var gameInfo = InputProcessor.GetGameInfoFromStringInput(input);
             var game = new Game(gameInfo);
-            var result = game.Play();
+            var result = game.DetermineWinner();
 
-            //Assert.IsTrue(result.Count() == 1);
-            //Assert.IsTrue(result.Select(p => p.PlayerNumber).Contains(2));
+            Assert.AreEqual(1, result.players.Count());
+            Assert.AreEqual("2", result.winnerText);
 
             input =
 @"4
@@ -34,11 +34,10 @@ namespace ThreeCardPoker.Test.GameTests
 
             gameInfo = InputProcessor.GetGameInfoFromStringInput(input);
             game = new Game(gameInfo);
-            result = game.Play();
+            result = game.DetermineWinner();
 
-            //Assert.IsTrue(result.Count() == 2);
-            //Assert.IsTrue(result.Select(p => p.PlayerNumber).Contains(2)
-            //    && result.Select(p => p.PlayerNumber).Contains(3));
+            Assert.AreEqual(2, result.players.Count());
+            Assert.AreEqual("2 3", result.winnerText);
         }
     }
 }

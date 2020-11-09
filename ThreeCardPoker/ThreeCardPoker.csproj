@@ -52,7 +52,6 @@
     <Compile Include="Player.cs" />
     <Compile Include="PlayerFactory.cs" />
     <Compile Include="RankType.cs" />
-    <Compile Include="Rules.cs" />
     <Compile Include="SuitType.cs" />
     <Compile Include="InputProcessor.cs" />
     <Compile Include="Program.cs" />

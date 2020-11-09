@@ -9,7 +9,6 @@ namespace ThreeCardPoker
 {
     public class Game
     {
-        private readonly Rules _Rules;
         private readonly int _PlayerCount;
         private readonly IEnumerable<Player> _Players;
 
@@ -22,46 +21,11 @@ namespace ThreeCardPoker
             _Players = _GameInfo.Players;
         }
 
-        public List<Player> Play()
+        public (IEnumerable<Player> players, string winnerText) DetermineWinner()
         {
-            foreach (var player in _Players)
-            {
-                bool isStraightFlush = false;
-                bool isThreeOfAKind = false;
-                bool isStraight = false;
-                bool isFlush = false;
-                bool isPair = false;
-                bool isHighCard = true;
-
-                var cardList = player.Cards.OrderBy(c => c.Rank).ToList();
-                if (cardList[0].Suit == cardList[1].Suit && cardList[1].Suit == cardList[2].Suit)
-                {
-                    isFlush = true;
-                    isHighCard = false;
-                }
-
-                if (cardList[0].Rank == cardList[1].Rank && cardList[1].Rank == cardList[2].Rank)
-                {
-                    isThreeOfAKind = true;
-                    isHighCard = false;
-                }
-                else if (cardList[0].Rank == cardList[1].Rank 
-                    || cardList[1].Rank == cardList[2].Rank
-                    || cardList[0].Rank == cardList[2].Rank)
-                {
-                    isPair = true;
-                    isHighCard = false;
-                }
-                else if ((cardList[0].Rank + 1) == cardList[1].Rank 
-                    && (cardList[1].Rank + 1) == cardList[2].Rank)
-                {
-                    isStraight = true;
-                    isHighCard = false;
-                }
-
-                isStraightFlush = isStraight && isFlush;
-            }
-            return null;
+            var highestHand = _Players.Select(p => p.HandType).Max();
+            var winningPlayers = _Players.Where(p => p.HandType == highestHand);
+            return (winningPlayers, string.Join(" ", winningPlayers.Select(p => p.PlayerNumber)));
         }
     }
 }
