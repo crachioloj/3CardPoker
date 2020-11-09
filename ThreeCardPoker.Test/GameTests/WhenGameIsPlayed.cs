@@ -12,12 +12,6 @@ namespace ThreeCardPoker.Test.GameTests
     {
         [TestMethod]
         [DataRow(
-@"4
-0 2c As 4d
-1 Kd 5h 6c
-2 Qc Jd 9s
-3 Jd 5h As", "0 1 2 3")]
-        [DataRow(
 @"3
 0 2c As 4d
 1 Kd 5h 6c
@@ -34,6 +28,16 @@ namespace ThreeCardPoker.Test.GameTests
 1 2d Ad 3d
 2 Jc Jd 9s
 3 Qc Kc Js", "1")]
+        [DataRow(
+@"2
+0 Ah 5h 2h
+1 Qd Jd 7d", "0")]
+        [DataRow(
+@"4
+0 2c As 4d
+1 Kd 5h 6c
+2 Qc Jd 9s
+3 Jd 5h As", "0 3")]
         public void AndValidInputIsProvidedThenCorrectWinnerIsReturned(string input, string expectedOutput)
         {
             var gameInfo = InputProcessor.GetGameInfoFromStringInput(input);

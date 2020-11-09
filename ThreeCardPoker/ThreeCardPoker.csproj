@@ -50,6 +50,7 @@
     <Compile Include="GameInfo.cs" />
     <Compile Include="HandType.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="PlayerExtensions.cs" />
     <Compile Include="PlayerFactory.cs" />
     <Compile Include="RankType.cs" />
     <Compile Include="Rules.cs" />
