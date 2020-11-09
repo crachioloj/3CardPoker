@@ -31,20 +31,10 @@ namespace ThreeCardPoker
             {
                 isPair = true;
             }
-            else if ((cardList[0].Rank + 1) == cardList[1].Rank
-                && (cardList[1].Rank + 1) == cardList[2].Rank)
+            else if (IsStraight(cardList.Select(card => card.Rank).ToList())
+                || IsStraight(cardList.Select(GetAlternateRankFromCard).OrderBy(c => c).ToList()))
             {
                 isStraight = true;
-            }
-            else
-            {
-                var ranks = cardList.Select(card => card.Rank);
-                if (ranks.Contains(RankType.Ace) 
-                    && ranks.Contains(RankType.Two) 
-                    && ranks.Contains(RankType.Three))
-                {
-                    isStraight = true;
-                }
             }
 
             if (isStraight && isFlush)
@@ -73,6 +63,16 @@ namespace ThreeCardPoker
             }
 
             return HandType.HighCard;
+        }
+
+        private static RankType GetAlternateRankFromCard(Card card)
+        {
+            return card.Rank == RankType.Ace ? RankType.LowAce : card.Rank;
+        }
+
+        private static bool IsStraight(List<RankType> ranklist)
+        {
+            return (ranklist[0] + 1) == ranklist[1] && (ranklist[1] + 1) == ranklist[2];
         }
     }
 }
