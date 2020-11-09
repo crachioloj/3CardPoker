@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace ThreeCardPoker
 {
-    [Flags]
     public enum HandType
     {
         HighCard = 0,
         Pair = 1,
         Flush = 2,
-        Straight = 4,
-        ThreeOfAKind = 8,
-        StraightFlush = Flush | Straight,
+        Straight = 3,
+        ThreeOfAKind = 4,
+        StraightFlush = 5,
     }
 }
