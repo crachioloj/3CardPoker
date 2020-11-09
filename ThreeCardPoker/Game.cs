@@ -18,7 +18,7 @@ namespace ThreeCardPoker
         {
             var highestHand = _Players.Select(p => p.HandType).Max();
             var winningPlayerNumbers = _Players.Where(p => p.HandType == highestHand)
-                .GetHighestRankedPlayers()
+                .ResolveTie(highestHand)
                 .Select(p => p.PlayerNumber)
                 .OrderBy(n => n);
 
