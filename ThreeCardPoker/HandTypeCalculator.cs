@@ -5,7 +5,7 @@ namespace ThreeCardPoker
 {
     public class HandTypeCalculator
     {
-        public static RankType GetHighestRank(IEnumerable<Card> cards) => cards.Select(c => c.Rank).Max();
+        public static RankType GetHighestRankFromCards(IEnumerable<Card> cards) => cards.Select(c => c.Rank).Max();
 
         public static HandType GetHandTypeFromCards(IEnumerable<Card> cards)
         {

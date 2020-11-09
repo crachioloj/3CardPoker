@@ -40,7 +40,7 @@ namespace ThreeCardPoker.Test.GameTests
 3 Jd 5h As", "0 3")]
         public void AndValidInputIsProvidedThenCorrectWinnerIsReturned(string input, string expectedOutput)
         {
-            var gameInfo = InputProcessor.GetGameInfoFromStringInput(input);
+            var (gameInfo, _) = InputProcessor.GetGameInfoFromStringInput(input);
             var game = new Game(gameInfo);
             string result = game.DetermineWinner();
 

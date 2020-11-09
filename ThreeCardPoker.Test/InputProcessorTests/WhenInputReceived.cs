@@ -22,10 +22,11 @@ namespace ThreeCardPoker.Test.InputProcessorTests
 0 2c As 4d
 1 Kd 5h 6c
 2 Jc Jd 9s")]
-        [ExpectedException(typeof(InvalidOperationException), "Invalid value provided for player count.")]
-        public void AndInputForPlayerCountIsInvalidThenExceptionIsThrown(string input)
+        public void AndInputForPlayerCountIsInvalidThenErrorIsReturned(string input)
         {
-            var _ = InputProcessor.GetGameInfoFromStringInput(input);
+            var (info, error) = InputProcessor.GetGameInfoFromStringInput(input);
+            Assert.IsNull(info);
+            Assert.AreEqual("Invalid value provided for player count.", error);
         }
 
         [TestMethod]
@@ -44,10 +45,11 @@ namespace ThreeCardPoker.Test.InputProcessorTests
 0 2c As 4d")]
         [DataRow(
 @"3")]
-        [ExpectedException(typeof(InvalidOperationException), "Number of player data rows does not match expected player count.")]
-        public void AndPlayerCountDoesNotMatchPlayerRowsThenExceptionIsThrown(string input)
+        public void AndPlayerCountDoesNotMatchPlayerRowsThenErrorIsReturned(string input)
         {
-            var _ = InputProcessor.GetGameInfoFromStringInput(input);
+            var (info, error) = InputProcessor.GetGameInfoFromStringInput(input);
+            Assert.IsNull(info);
+            Assert.AreEqual("Number of player data rows does not match expected player count.", error);
         }
 
         [TestMethod]
@@ -65,7 +67,7 @@ namespace ThreeCardPoker.Test.InputProcessorTests
  2 Jc Jd   9s  ", 2)]
         public void AndInputIsValidWithExtraWhiteSpaceThenCorrectGameInfoCreated(string input, int playerCount)
         {
-            var info = InputProcessor.GetGameInfoFromStringInput(input);
+            var (info, _) = InputProcessor.GetGameInfoFromStringInput(input);
             Assert.AreEqual(playerCount, info.PlayerCount);
             foreach (var player in info.Players)
             {
@@ -87,7 +89,7 @@ namespace ThreeCardPoker.Test.InputProcessorTests
 3 Tc 9c 3c", 4)]
         public void AndInputIsThenCorrectGameInfoCreated(string input, int playerCount)
         {
-            var info = InputProcessor.GetGameInfoFromStringInput(input);
+            var (info, _) = InputProcessor.GetGameInfoFromStringInput(input);
             Assert.AreEqual(playerCount, info.PlayerCount);
             foreach (var player in info.Players)
             {

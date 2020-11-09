@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ThreeCardPoker
 {
     public static class PlayerExtensions
     {
-
         public static IEnumerable<Player> GetHighestRankedPlayers(this IEnumerable<Player> players)
         {
             if (players.Count() > 1)

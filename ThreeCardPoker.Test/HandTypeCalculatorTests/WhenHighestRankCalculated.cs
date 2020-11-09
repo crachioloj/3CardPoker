@@ -26,7 +26,7 @@ namespace ThreeCardPoker.Test.HandTypeCalculatorTests
                 cards.Add(card);
             }
 
-            var highestRank = HandTypeCalculator.GetHighestRank(cards);
+            var highestRank = HandTypeCalculator.GetHighestRankFromCards(cards);
             Assert.AreEqual(expectedRank, highestRank);
         }
     }

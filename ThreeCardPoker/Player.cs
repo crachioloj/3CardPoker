@@ -20,7 +20,7 @@ namespace ThreeCardPoker
             PlayerNumber = number;
             Cards = cards;
             HandType = HandTypeCalculator.GetHandTypeFromCards(cards);
-            HighestRank = HandTypeCalculator.GetHighestRank(cards);
+            HighestRank = HandTypeCalculator.GetHighestRankFromCards(cards);
         }
     }
 }

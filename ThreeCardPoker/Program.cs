@@ -19,6 +19,11 @@ namespace ThreeCardPoker
             if (!int.TryParse(header.Trim(), out int playerCount) || playerCount < 0)
             {
                 Console.WriteLine("Invalid input.");
+                return;
+            }
+            else if (playerCount == 0)
+            {
+                return;
             }
             else
             {
@@ -32,7 +37,14 @@ namespace ThreeCardPoker
             }
 
             var input = sb.ToString();
-            var info = InputProcessor.GetGameInfoFromStringInput(input);
+            var (info, error) = InputProcessor.GetGameInfoFromStringInput(input);
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                Console.WriteLine($"Invalid input: {error}");
+                return;
+            }
+
             var game = new Game(info);
 
             Console.WriteLine("Winner(s):");
