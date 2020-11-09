@@ -36,6 +36,16 @@ namespace ThreeCardPoker
             {
                 isStraight = true;
             }
+            else
+            {
+                var ranks = cardList.Select(card => card.Rank);
+                if (ranks.Contains(RankType.Ace) 
+                    && ranks.Contains(RankType.Two) 
+                    && ranks.Contains(RankType.Three))
+                {
+                    isStraight = true;
+                }
+            }
 
             if (isStraight && isFlush)
             {

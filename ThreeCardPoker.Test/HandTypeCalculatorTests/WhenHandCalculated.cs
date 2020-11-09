@@ -11,7 +11,7 @@ namespace ThreeCardPoker.Test.HandTypeCalculatorTests
     public class WhenHandCalculated
     {
         [TestMethod]
-        //[DataRow(new string[] { "0", "Ac", "2c", "3c" }, HandType.StraightFlush)]
+        [DataRow(new string[] { "0", "Ac", "2c", "3c" }, HandType.StraightFlush)]
         [DataRow(new string[] { "0", "2c", "3c", "4c" }, HandType.StraightFlush)]
         [DataRow(new string[] { "0", "5d", "6d", "7d" }, HandType.StraightFlush)]
         [DataRow(new string[] { "0", "8h", "9h", "Th" }, HandType.StraightFlush)]
@@ -19,7 +19,7 @@ namespace ThreeCardPoker.Test.HandTypeCalculatorTests
         [DataRow(new string[] { "0", "Js", "Qs", "Ks" }, HandType.StraightFlush)]
         [DataRow(new string[] { "0", "Qs", "Ks", "As" }, HandType.StraightFlush)]
 
-        //[DataRow(new string[] { "0", "Ac", "2d", "3s" }, HandType.Straight)]
+        [DataRow(new string[] { "0", "Ac", "2d", "3s" }, HandType.Straight)]
         [DataRow(new string[] { "0", "2c", "3d", "4s" }, HandType.Straight)]
         [DataRow(new string[] { "0", "5c", "6d", "7s" }, HandType.Straight)]
         [DataRow(new string[] { "0", "8c", "9d", "Ts" }, HandType.Straight)]
