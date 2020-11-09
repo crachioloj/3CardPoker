@@ -12,7 +12,7 @@ namespace ThreeCardPoker
                 throw new ArgumentNullException(nameof(values));
             }
 
-            if (values.Length != 4)
+            if (values.Length != Rules.ValuesPerDataRow)
             {
                 throw new InvalidOperationException("Incorrect number of values provided.");
             }
@@ -23,7 +23,7 @@ namespace ThreeCardPoker
             }
 
             var cards = new List<Card>();
-            for (int i = 1; i < 4; i++)
+            for (int i = 1; i < Rules.ValuesPerDataRow; i++)
             {
                 string cardValue = values[i];
                 var card = CardFactory.CreateCard(cardValue);

@@ -12,7 +12,7 @@ namespace ThreeCardPoker
 
         public Player(int number, IEnumerable<Card> cards)
         {
-            if (cards.Count() != 3)
+            if (cards.Count() != Rules.CardsPerHand)
             {
                 throw new InvalidOperationException("Only three cards are allowed per player.");
             }

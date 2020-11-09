@@ -26,7 +26,7 @@ namespace ThreeCardPoker
         {
             if (int.TryParse(rankChar.ToString(), out int numValue))
             {
-                if (numValue < 2 || numValue > 9)
+                if (numValue < Rules.MinNumberSuit || numValue > Rules.MaxNumberSuit)
                 {
                     throw new InvalidOperationException($"{rankChar} is a numeric value, but does not represent a valid rank.");
                 }
