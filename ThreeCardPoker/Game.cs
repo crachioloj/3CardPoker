@@ -21,11 +21,14 @@ namespace ThreeCardPoker
             _Players = _GameInfo.Players;
         }
 
-        public (IEnumerable<Player> players, string winnerText) DetermineWinner()
+        public string DetermineWinner()
         {
             var highestHand = _Players.Select(p => p.HandType).Max();
-            var winningPlayers = _Players.Where(p => p.HandType == highestHand);
-            return (winningPlayers, string.Join(" ", winningPlayers.Select(p => p.PlayerNumber)));
+            var winningPlayerNumbers = _Players.Where(p => p.HandType == highestHand)
+                .Select(p => p.PlayerNumber)
+                .OrderBy(n => n);
+
+            return string.Join(" ", winningPlayerNumbers);
         }
     }
 }

@@ -11,33 +11,36 @@ namespace ThreeCardPoker.Test.GameTests
     public class WhenGameIsPlayed
     {
         [TestMethod]
-        public void AndValidInputIsProvidedThenCorrectWinnerIsReturned()
-        {
-            string input =
+        [DataRow(
+@"4
+0 2c As 4d
+1 Kd 5h 6c
+2 Qc Jd 9s
+3 Jd 5h As", "0 1 2 3")]
+        [DataRow(
 @"3
 0 2c As 4d
 1 Kd 5h 6c
-2 Jc Jd 9s";
-            var gameInfo = InputProcessor.GetGameInfoFromStringInput(input);
-            var game = new Game(gameInfo);
-            var result = game.DetermineWinner();
-
-            Assert.AreEqual(1, result.players.Count());
-            Assert.AreEqual("2", result.winnerText);
-
-            input =
+2 Jc Jd 9s", "2")]
+        [DataRow(
 @"4
 0 Qc Kc 4s
 1 Ah 2c Js
 2 3h 9h Th
-3 Tc 9c 3c";
+3 Tc 9c 3c", "2 3")]
+        [DataRow(
+@"4
+0 5c 5s 5d
+1 2d Ad 3d
+2 Jc Jd 9s
+3 Qc Kc Js", "1")]
+        public void AndValidInputIsProvidedThenCorrectWinnerIsReturned(string input, string expectedOutput)
+        {
+            var gameInfo = InputProcessor.GetGameInfoFromStringInput(input);
+            var game = new Game(gameInfo);
+            string result = game.DetermineWinner();
 
-            gameInfo = InputProcessor.GetGameInfoFromStringInput(input);
-            game = new Game(gameInfo);
-            result = game.DetermineWinner();
-
-            Assert.AreEqual(2, result.players.Count());
-            Assert.AreEqual("2 3", result.winnerText);
+            Assert.AreEqual(expectedOutput, result);
         }
     }
 }
