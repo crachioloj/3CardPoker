@@ -10,13 +10,33 @@ namespace ThreeCardPoker
     {
         static void Main(string[] args)
         {
-//            string input =
-//@"3     
-//0 2c As 4d   
-//1    Kd 5h 6c      
-//2 Jc Jd   9s  ";
+            var sb = new StringBuilder();
 
-//            var info = InputProcessor.ProcessStringInput(input);
+            Console.WriteLine("Enter the number of players.");
+            string header = Console.ReadLine();
+            sb.AppendLine(header);
+
+            if (!int.TryParse(header.Trim(), out int playerCount) || playerCount < 0)
+            {
+                Console.WriteLine("Invalid input.");
+            }
+            else
+            {
+                Console.WriteLine("Enter player data.");
+            }
+
+            for (int i = 0; i < playerCount; i++)
+            {
+                var line = Console.ReadLine();
+                sb.AppendLine(line);
+            }
+
+            var input = sb.ToString();
+            var info = InputProcessor.GetGameInfoFromStringInput(input);
+            var game = new Game(info);
+
+            Console.WriteLine("Winner(s):");
+            Console.WriteLine(game.DetermineWinner());
         }
     }
 }
