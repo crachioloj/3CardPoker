@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ThreeCardPoker
 {
-    public class Card
+    public class Card : IEquatable<Card>
     {
         public RankType Rank { get; }
         public SuitType Suit { get; }
@@ -25,9 +26,24 @@ namespace ThreeCardPoker
             }
             else
             {
-                Card c = (Card)obj;
-                return (c.Rank == Rank) && (c.Suit == Suit);
+                Card otherCard = (Card)obj;
+                return (otherCard.Rank == Rank) && (otherCard.Suit == Suit);
             }
+        }
+
+        public bool Equals(Card other)
+        {
+            return other != null &&
+                   Rank == other.Rank &&
+                   Suit == other.Suit;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 483265535;
+            hashCode = hashCode * -1521134295 + Rank.GetHashCode();
+            hashCode = hashCode * -1521134295 + Suit.GetHashCode();
+            return hashCode;
         }
     }
 }

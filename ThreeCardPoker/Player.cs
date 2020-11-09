@@ -10,6 +10,7 @@ namespace ThreeCardPoker
     {
         public int PlayerNumber { get; }
         public IEnumerable<Card> Cards { get; }
+        public HandType HandType { get; }
 
         public Player(int number, IEnumerable<Card> cards)
         {
