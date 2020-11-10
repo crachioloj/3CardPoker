@@ -14,52 +14,46 @@ namespace ThreeCardPoker
             {
                 return ResolveThreeOfAKind(players);
             }
-            
+
             if (hand == HandType.Pair)
             {
                 return ResolvePair(players);
             }
 
-            //var remainingCardsByPlayer = new Dictionary<Player, List<Card>>();
-            //foreach (var player in players)
-            //{
-            //    if (!remainingCardsByPlayer.ContainsKey(player))
-            //    {
-            //        remainingCardsByPlayer.Add(player, player.Cards.OrderByDescending(c => c.Rank).ToList());
-            //    }
-            //}
+            return ResolveOtherHands(players);
+        }
 
-            //int remainingCards = 3;
-            //bool winnerFound = false;
-            //var highestRank = RankType.LowAce;
-            //for (int i = 2; i >= 0; i--)
-            //{
-            //    foreach (var player in remainingCardsByPlayer.Keys)
-            //    {
-            //        if (remainingCardsByPlayer.TryGetValue(player, out List<Card> cards))
-            //        {
-            //            var rank = cards[i].Rank;
-            //        }
-            //    }
-            //    remainingCards--;
-            //}
+        private static IEnumerable<Player> ResolveOtherHands(IEnumerable<Player> players)
+        {
+            var winners = players;
+            for (int i = 0; i < Rules.CardsPerHand; i++)
+            {
+                var highestRank = RankType.LowAce;
+                var winnerList = new List<Player>();
+                foreach (var player in players)
+                {
+                    var playerHighest = player.Cards.OrderByDescending(c => c.Rank).Skip(i).First().Rank;
+                    if (playerHighest > highestRank)
+                    {
+                        winnerList.Clear();
+                        winnerList.Add(player);
+                        highestRank = playerHighest;
+                    }
+                    else if (playerHighest == highestRank)
+                    {
+                        winnerList.Add(player);
+                    }
+                }
 
-            //// rank 1
-            //if (winners.Count() > 1)
-            //{
-            //    var highestRank = winners.Select(p => p.HighestRank).Max();
-            //    winners = players.Where(p => p.HighestRank == highestRank);
-            //    // rank 2
-            //    if (winners.Count() > 1)
-            //    {
-            //        foreach (var player in winners)
-            //        {
-            //            var cards = (player.Cards.Where(c => c.Rank != highestRank));
-            //            //highestRank = 
-            //        }
-            //    }
-            //}
-            return players;
+
+                if (winnerList.Count() == 1)
+                {
+                    winners = winnerList;
+                    break;
+                }
+            }
+
+            return winners;
         }
 
         private static IEnumerable<Player> ResolvePair(IEnumerable<Player> players)
