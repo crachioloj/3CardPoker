@@ -12,11 +12,11 @@ namespace ThreeCardPoker
         {
             var sb = new StringBuilder();
 
-            Console.WriteLine("Enter the number of players.");
+            Console.WriteLine("Please enter game data:" + "\r\n");
             string header = Console.ReadLine();
             sb.AppendLine(header);
 
-            if (!int.TryParse(header.Trim(), out int playerCount) || playerCount < 0)
+            if (!int.TryParse(header.Trim(), out int playerCount) || playerCount <= 0 || playerCount >= 24)
             {
                 Console.WriteLine("Invalid input.");
                 return;
@@ -24,10 +24,6 @@ namespace ThreeCardPoker
             else if (playerCount == 0)
             {
                 return;
-            }
-            else
-            {
-                Console.WriteLine("Enter player data.");
             }
 
             for (int i = 0; i < playerCount; i++)
@@ -47,6 +43,8 @@ namespace ThreeCardPoker
 
             var game = new Game(info);
 
+
+            Console.WriteLine();
             Console.WriteLine("Winner(s):");
             Console.WriteLine(game.DetermineWinner());
         }
