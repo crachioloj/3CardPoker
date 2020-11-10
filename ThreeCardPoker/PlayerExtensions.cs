@@ -45,7 +45,6 @@ namespace ThreeCardPoker
                     }
                 }
 
-
                 if (winnerList.Count() == 1)
                 {
                     winners = winnerList;

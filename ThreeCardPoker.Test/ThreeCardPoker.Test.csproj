@@ -54,7 +54,6 @@
     <Compile Include="HandTypeCalculatorTests\WhenHandCalculated.cs" />
     <Compile Include="HandTypeCalculatorTests\WhenHighestRankCalculated.cs" />
     <Compile Include="PlayerFactoryTests\WhenCreatingPlayer.cs" />
-    <Compile Include="SampleData.cs" />
     <Compile Include="InputProcessorTests\WhenInputReceived.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
