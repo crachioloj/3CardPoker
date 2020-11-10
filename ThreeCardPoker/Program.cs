@@ -21,10 +21,6 @@ namespace ThreeCardPoker
                 Console.WriteLine("Invalid input.");
                 return;
             }
-            else if (playerCount == 0)
-            {
-                return;
-            }
 
             for (int i = 0; i < playerCount; i++)
             {
